@@ -79,6 +79,15 @@ class MatrixCSR{
         msize get_row(int i){
             return *upper_bound(ALL(rowptr),i);
         }
+        void get_matrix(){
+            cout<<"Size:"<<size<<endl<<"ICN:"<<endl;
+            pvec(icl);
+            cout<<"ROWPTR"<<endl;
+            pvec(rowptr);
+            cout<<"VAL"<<endl;
+            pvec(values);
+        }
+
 };
 
 class MatrixCSC{
@@ -97,7 +106,6 @@ class MatrixCSC{
             for(msize i=0; i<size; i++){
                 for(msize k = 0; k<non_zeros; k++){
                     if(matrix.get_icl_val(k) == i){
-                        cout<<"seen "<<i<<" : "<<k<<endl;
                         values.push_back(matrix.get_value(k));
                         irn.push_back(matrix.get_row(k));
                     }
@@ -106,7 +114,7 @@ class MatrixCSC{
             }
         }
 
-        vvm get_matrix(){
+        void get_matrix(){
             cout<<"Size:"<<size<<endl<<"IRN:"<<endl;
             pvec(irn);
             cout<<"COLPTR"<<endl;
@@ -118,6 +126,9 @@ class MatrixCSC{
 
 int main(){
     MatrixCSR a(cin);
+    cout<<"A: "<<endl;
+    a.get_matrix();
     MatrixCSC res(a);
-    pvec(res.get_matrix());
+    cout<<endl<<"RES:"<<endl;
+    res.get_matrix();
 }
