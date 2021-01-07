@@ -48,6 +48,10 @@ class Matrix{
             matrix.clear();
             matrix.shrink_to_fit();
             matrix.resize(width, vi(height, def));
+            for(int i = 0; i<w; i++)
+                for(int k= 0; k<h; k++){
+                    matrix[i][k] = rand() % 1000000;
+                }
         }
 
         Matrix(istream &stream){
@@ -78,7 +82,10 @@ class Matrix{
             Matrix res(m, n, 0);
             for(msize i = 0; i < m; i++)
                 for(msize p = 0; p < k; p++)
-                    res.matrix[i] = sum_vectors(res.matrix[i], mul_vector(b.matrix[p], matrix[i][p]));
+                    for(msize j = 0; j < n; j++){
+                        res.matrix[i][j] += b.matrix[p][j] * matrix[i][p];
+                    }
+                    // res.matrix[i] = sum_vectors(res.matrix[i], mul_vector(b.matrix[p], matrix[i][p]));
 
             return res;
        }
@@ -93,7 +100,9 @@ class Matrix{
 
 
 int main(){
-    Matrix a(cin), b(cin);
+    srand(time(0));
+    // Matrix a(cin), b(cin);
+    Matrix a(1000,1000), b(1000,1000);
     Matrix res = a * b;
-    pvec(res.get_matrix());
+    // pvec(res.get_matrix());
 }
