@@ -7,7 +7,6 @@ def ldlt(matrix):
     result = [[0] * len(matrix) for _ in range(len(matrix))]
     for i in range(len(matrix)):
         for j in range(i+1):
-            # tmp_sum = sum(L[i][j] * L[k][j] for j in range(k))
             tmp = 0
             for k in range(j):
                 tmp += result[i][k] * result[j][k]
